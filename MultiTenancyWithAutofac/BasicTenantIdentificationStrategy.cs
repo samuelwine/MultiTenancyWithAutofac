@@ -6,7 +6,7 @@ public class BasicTenantIdentificationStrategy : ITenantIdentificationStrategy
 {
     public bool TryIdentifyTenant(out object tenantId)
     {
-        tenantId = "1";
+        tenantId = "2";
         return true;
     }
 }

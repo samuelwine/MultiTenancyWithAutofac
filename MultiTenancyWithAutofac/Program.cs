@@ -43,8 +43,16 @@ namespace MultiTenancyWithAutofac
         {
             var tenantIdentifier = new BasicTenantIdentificationStrategy();
             var mtc = new MultitenantContainer(tenantIdentifier, container);
-            mtc.ConfigureTenant("1", cb => cb.RegisterType<TenantOneDependency>().As<IDependency>());
-            mtc.ConfigureTenant("2", cb => cb.RegisterType<TenantTwoDependency>().As<IDependency>());
+            mtc.ConfigureTenant("1", cb =>
+            {
+                cb.RegisterType<TenantOneDependency>().As<IDependency>();
+                cb.RegisterType<TenantOneProperties>().As<ITenantProperties>();
+            });
+            mtc.ConfigureTenant("2", cb =>
+            {
+                cb.RegisterType<TenantTwoDependency>().As<IDependency>();
+                cb.RegisterType<TenantTwoProperties>().As<ITenantProperties>();
+            });
             return mtc;
         }
     }
